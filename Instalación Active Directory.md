@@ -33,7 +33,7 @@ G-->H[En las opciones de instalación elgie la instalación según un archivo de
 
 ## Iniciación e instalación de Active Directory
 
-###Configuración de red
+### Configuración de red
 
 ```mermaid
 flowchart TD
