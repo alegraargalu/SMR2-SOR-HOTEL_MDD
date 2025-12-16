@@ -114,7 +114,7 @@ U --> V[Clica cambiar en las propiedades del sistema]
 V --> W[Cambia el nombre de domninio a TAILWINDTRADERS y aceptar]
 ```
 
-### Instalación de Active Directory en la segunda máquina
+## Instalación de Active Directory en la segunda máquina
 
 ```mermaid
 flowchart TD
@@ -134,4 +134,35 @@ M --> N[Opciones adicionales por defecto]
 N --> O[Rutas por defecto]
 O --> P[Review Options y prerrequisitos por defecto]
 P --> Q[Cuando se reinicie inicia sesión como tailwindtraders\Administrador con la contraseña que has estado utilizando todo el rato]
+```
+
+### Transferir el RID Master a la segunda máquina
+
+```mermaid
+flowchart TD
+A[Entra en el Administrador del Servidor] --> B[B]
+B --> C[C]
+C --> D[D]
+D --> E[E]
+E --> F[F]
+F --> G[G]
+G --> H[H]
+H --> I[I]
+I --> J[J]
+J --> K[K]
+K --> L[L]
+L --> M[M]
+M --> N[N]
+N --> O[O]
+O --> P[P]
+P --> Q[Q]
+Q --> R[R]
+R --> S[S]
+S --> T[T]
+T --> U[U]
+U --> V[V]
+V --> W[W]
+W --> X[X]
+X --> Y[Y]
+Y --> Z[Z]
 ```
