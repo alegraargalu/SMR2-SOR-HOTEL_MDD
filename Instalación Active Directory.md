@@ -68,7 +68,7 @@ B --> C[Clica el nombre del equipo]
 C --> D[En la ventana que te aparece pulsa cambiar]
 D --> E[Pónle de nombre al equipo TAILWIND-DC1, que es el nombre que le hemos puesto a la máquina virtual y a aceptar]
 E --> F[Cierra la ventana y te dará la opción de reiniciar, dale a Restart Now, si no te sale la opción de restart now reinicia tú el sistema operativo]
-F --> G[Cuando hayas vuelto a entrar en la cuenta de administrador y el Server Manager/Administrador del Servidor clica la opción Administrar/Manage y Add Roles and Features/Agregar roles y características]
+F --> G[Cuando hayas vuelto a entrar en la cuenta de administrador y el Server Manager/Administrador del Servidor, clica la opción Administrar/Manage y Add Roles and Features/Agregar roles y características]
 G --> H[Al principio dale a siguiente, en tipo de instalación selecciona la instalación basada en roles o características]
 H --> I[En el destinatario elige la opción Seleccionar uno de los servidores del grupo]
 I --> J[Selecciona TAILWIND-DC1 y siguiente]
@@ -112,7 +112,26 @@ S --> T[Entra en la consola del Administrador del Servidor]
 T --> U[Ves a la sección del Servidor Local]
 U --> V[Clica cambiar en las propiedades del sistema]
 V --> W[Cambia el nombre de domninio a TAILWINDTRADERS y aceptar]
-W --> X[En los cambios de dominio pon de nombre de usuario TAILWINDTRADERS\Administrador, y de contraseña Pa55w.rdPa55w.rd]
-X --> Y[Aceptar y cerrar]
-Y --> Z[Reinicia]
+```
+
+### Instalación de Active Directory en la segunda máquina
+
+```mermaid
+flowchart TD
+A --> B[Cuando hayas entrado ves al Server Manager/Administrador del Servidor, clica la opción Administrar/Manage y Add Roles and Features/Agregar roles y características]
+B --> C[Al principio dale a siguiente, en tipo de instalación selecciona la instalación basada en roles o características]
+C --> D[En el destinatario elige la opción Seleccionar uno de los servidores del grupo]
+D --> E[Selecciona TAILWIND-DC1 y siguiente]
+E --> F[Elige el Servicio de Dominio de Active Directory/Active Directory Domain Services y agregar roles]
+F --> G[siguiente Hasta el final e Install]
+G --> H[Cuanto se instale dale a la bandera]
+H --> I[Clica el texto en azul que dice Promover este servidor a un controlador de dominio]
+I --> J[Selecciona añadir un controlador de dominio a un dominio existente y escribe tailwindtraders.internal]
+J --> K[Cuando hayas introducido el dominio clica en la casilla de al lado que pone seleccionar y pon en el nombre de usuario TAILWINDTRADERS\Administrador y en la contraseña la que hayas establecido, en mi caso Pa55w.rdPa55w.rd]
+K --> L[En la seiguiente pestaña, las opciones de controlador de dominio, déjalas por defecto y en el modo de restauración de servicios de directorio DSRM, escribe la misma contraseña que antes]
+L --> M[DNS por defecto]
+M --> N[Opciones adicionales por defecto]
+N --> O[Rutas por defecto]
+O --> P[Review Options y prerrequisitos por defecto]
+P --> Q[Cuando se reinicie inicia sesión como tailwindtraders\Administrador con la contraseña que has estado utilizando todo el rato]
 ```
