@@ -1,5 +1,5 @@
 # Instalación de Active Directory
-# 1. Activar e instalar Hiper-V
+## Activar e instalar Hiper-V
 Durante todo este repositorio cada vez que escriba: guión, comilla o paréntesis. Seguidos o precedidos de una coma y haya mencionado que voy a proporcionar un comando me estaré refiriendo a los signos.
 
 ```mermaid
@@ -17,7 +17,7 @@ J-->K[New,guión,NetNat guión,Name comillaNATNetwork,comilla guión,InternalIPI
 K-->L[Después de ejecutar estos comandos puedes cerar el PowerShell]
 ```
 
-# 2. Creación de la Máquina virtual e instalación de Active Directory
+## Creación de la Máquina virtual e instalación de Active Directory
 ## Creación de la máquina
 
 ```mermaid
@@ -86,7 +86,7 @@ T --> U[Instalar y reiniciar]
 U --> V[Cuando vuelvas a entrar pon de nombre de usuario tailwindtraders\administrador y la contraseña]
 ```
 
-### Creación de un Windows Server miembro del dominio
+## Creación de la segunda máquina virtual, Windows Server miembro del dominio
 
 ```mermaid
 flowchart TD
@@ -136,33 +136,289 @@ O --> P[Review Options y prerrequisitos por defecto]
 P --> Q[Cuando se reinicie inicia sesión como tailwindtraders\Administrador con la contraseña que has estado utilizando todo el rato]
 ```
 
-### Transferir el RID Master a la segunda máquina
+## Transferir el RID Master a la segunda máquina
 
 ```mermaid
 flowchart TD
-A[Entra en el Administrador del Servidor] --> B[B]
-B --> C[C]
-C --> D[D]
-D --> E[E]
-E --> F[F]
+A[Entra en el Administrador del Servidor] --> B[En herramientas entra en Usuarios y equipos de Active Directory]
+B --> C[Haz clic derecho en Usuarios y equipos de Active Directory]
+C --> D[Todas las tareas y Maestros de operaciones]
+D --> E[En la pestaña RID pulsa cambiar, di que Sí y luego acepta]
+```
+
+## Creación de un sitio y configuración de una subred
+
+```mermaid
+flowchart TD
+A[Entra con la cuenta TAILWINDTRADERS\Administrador] --> B[En Herramientas entra en Servicios y sitios de Active Directory]
+B --> C[Haz clic derecho en sitios]
+C --> D[Nuevo sitio]
+D --> E[En la casilla nombre pon Sydney]
+E --> F[En el nombre de enlace elige DEFAULTIPSITELINK y aceptar]
+F --> G[Expande la carpeta sitios]
+G --> H[Haz clic derecho en subredes]
+H --> I[Nueva subred]
+I --> J[En el prefijo escribe 172.16.1.0/24]
+J --> K[Elige Sydney en el nombre de sitio y acepta]
+```
+
+## Creación de unidades organizativas
+
+```mermaid
+flowchart TD
+A[Entra a la otra máquina virtual, TAILWIND-DC1, y al Administrador del Servidor] --> B[En Herrmientas entra en la opción Usuarios y equipos de Active Directory]
+B --> C[Clic derecho en tailwindtraders.internal]
+C --> D[Nuevo]
+D --> E[Unidad Organizativa]
+E --> F[En nombre escribe Sydney y acepta]
+F --> G[Vuelve a hacerlo pero en el nombre en lugar de Sydney escribe Melbourne y Brisbane]
+```
+
+## Creación de usuarios
+
+```mermaid
+flowchart TD
+A[Entra en Administrador del Servidor] --> B[Entra en Usuarios y equipos de Active Directory, está en Herramientas]
+B --> C[Clic derecho en Sydney]
+C --> D[Nuevo]
+D --> E[Escribe SydneyContractor en la casilla de nombre completo y nombre de inicio de sesión de usuario]
+E --> F[Siguiente]
+F --> G[En la contraseña escribe Pa55w.rdPa55w.rd y siguiente]
+G --> H[Finalizar]
+H --> I[Clica Sydney]
+I --> J[Haz doble clic en SydneyContractor]
+J --> K[En la pestaña Cuenta ves al tiempo de caducación]
+K --> L[En Fin de... pon de fecha 1 de enero de 2030]
+L --> M[Aceptar]
+M --> N[Haz clic derecho en SydneyContractor]
+N --> O[Copiar]
+O --> P[Escribe MelbourneContractor en la casilla de nombre completo y inicio de sesión de usuario]
+P --> Q[Siguiente]
+Q --> R[En contraseña escribe Pa55w.rdPa55w.rd]
+R --> S[Siguiente y Finalizar]
+S --> T[Haz clic derecho en SydneyContractor y copiar]
+T --> U[En el apartado de nombre completo y nombre de inicio de sesión de usuario BrisbaneContractor]
+U --> V[Siguiente]
+V --> W[En la contraseñea escribe Pa55w.rdPa55w.rd]
+W --> X[Siguiente y Finalizar]
+X --> Y[Mueve el MelbourneContractor a Melbourne y acepta la advertencia]
+Y --> Z[Mueve el BrisbaneContractor a Brisbane y acepta la advertencia]
+```
+
+## Creación de grupo de administradores de Sydney
+
+```mermaid
+flowchart TD
+A[Entra en el Administrador del Servidor] --> B[En la pestaña Herramientas entra en Usuarios y equipos de Active Directory]
+B --> C[Clic derecho en tailwindtraders.internal]
+C --> D[Nuevo]
+D --> E[Grupo]
+E --> F[En el nombre escribe Administradores de Sydney]
+F --> G[Selecciona Universal]
+G --> H[Acepta]
+H --> I[En Sydney haz doble clic en SydneyContractor]
+I --> J[En la ventana Miembro de... pulsa agregar]
+J --> K[Escribe Administradores de Sydney]
+K --> L[Comprobar nombres]
+L --> M[Acepta todo]
+```
+
+## Creación de un usuario como un usuario protegido
+
+```mermaid
+flowchart TD
+A[Entra en el Administrador del Servidor] --> B[En la ventana Herramientas entra en Usuarios y Equipos de Active Directory]
+B --> C[Ves a Sydney]
+C --> D[Doble clic en SydneyContractor]
+D --> E[En la venta Miembro de... clica agregar]
+E --> F[Escribe Usuarios protegidos]
+F --> G[Comprueba el nombre]
+G --> H[Acepta todo]
+```
+
+## Delegar permisos de seguridad
+
+```mermaid
+flowchart TD
+A[Entra en el Administrador del Servidor] --> B[Desplega la ventana de Herramientas y abre Usuarios y Equipos de Active Directory]
+B --> C[Haz clic derecho en Sydney]
+C --> D[Delegar control]
+D --> E[En la primera página déjala por defecto y sigue]
+E --> F[Pulsa agregar y escribe Administradores de Sydney]
+F --> G[Comprobar nombres]
+G --> H[Aceptar y siguiente]
+H --> I[En las tareas a delegar elige Restaurar contraseñas de usuarios y forzar el cambio de contraseñas en le siguiente inicio de sesión]
+I --> J[Siguiente y Finalizar]
+```
+
+## Configuración de atributos para un usuario
+
+```mermaid
+flowchart TD
+A[Entra en el Administardor del Servidor] --> B[Enra en Usuarios y Equipos de Active Directory]
+B --> C[Selecciona Sydney]
+C --> D[Haz clic derecho en SydneyContractor]
+D --> E[Propiedades]
+E --> F[En la ventana de Direcciones selecciona en la casilla de ciudad Sydney]
+F --> G[Siguiente]
+G --> H[Haz clic derecho en tailwindtrader.internal]
+H --> I[Buscar]
+I --> J[En la ventana Avanzado pulsa la casilla de arriba a la izquierda]
+J --> K[Selecciona usuario y luego ciudad]
+K --> L[En la condicion selecciona Es paréntesis,exacto,paréntesis]
+L --> M[Elige o escribe Sydney y encontrar ahora]
+M --> N[Clica Sí]
+N --> O[Comprueba que el SydneyContractor aparece en la lista de resultados encontrados]
+O --> P[Ciérralo]
+```
+
+## Desactivar el Usuario Contratista de Melbourne
+
+```mermaid
+flowchart TD
+A[Entrar en el Administrador del Servidor] --> B[En la ventana Herramientas entra en Usuarios y Equipos de Active Directory]
+B --> C[Dale a Melbourne]
+C --> D[Clic derecho en MelbourneContrator]
+D --> E[Desactivar cuenta]
+E --> F[Aceptar]
+```
+
+## Restablecer contraseña del Usuario Contratista de Brisbane
+
+```mermaid
+flowchart TD
+A[Entra en el Administrador del Servidor] --> B[En la ventana Herramientas entra en Usuarios y Equipos de Active Directory]
+B --> C[Entra en Brisbane]
+C --> D[Clic derecho en BrisbaneContractor]
+D --> E[Restablecer contraseña]
+E --> F[En la caja de texto para restablecer la contraseña escribe Pa66w.rdPa66w.rd]
+F --> G[Acepta todo]
+```
+
+## Configuración de Directiva de Contraseña de Dominio
+
+```mermaid
+flowchart TD
+A[Entra en el Administrador del Servidor] --> B[En la ventana Herramientas entra en el Administrador de Directivas de Grupo]
+B --> C[Expande el Bosque tailwindtraders.internal]
+C --> D[Expande la carpeta Dominios]
+D --> E[Expande el Dominio tailwindtraders.internal]
+E --> F[Clic derecho en las Directivas de Dominio por Defecto]
+F --> G[Editar]
+G --> H[Expande Equipo/Computer]
+H --> I[Expande Configuración]
+I --> J[Expande Directivas]
+J --> K[Expande Configuración de Windows]
+K --> L[Expande Configuración de Seguridad]
+L --> M[Expande Directivas de Cuenta]
+M --> N[Expande Directivas de contraseñas]
+N --> O[Dale doble clic a la longitud mínima de la contraseña]
+O --> P[Cambia la longitud mínima a 14]
+P --> Q[Acepta y ciérralo todo]
+```
+
+## Configuración de Directivas de Contraseñas
+
+```mermaid
+flowchart TD
+A[Entra en el Administrador del Servidor] --> B[En la vetana Herramientas entra en el Centro Administrativo de Active Directory]
+B --> C[Clica en tailwindtraders paréntesis,local,paréntesis]
+C --> D[Busca la opción Sistema en el panel que hay al lado en la mitad superior del panel donde está la opción que hemos seleccionado anteriormente]
+D --> E[Expande esa opción]
+E --> F[Busca Configuración de contraseña, clic derecho, nuevo]
+F --> G[Configuración de contraseña]
+G --> H[En la casilla a rellenar pon Domain Admin Password Policy]
+H --> I[La casilla Precedente ponla en 1]
+I --> J[La longitud mínima de la contraseña ponla en 16]
+J --> K[Acepta]
+K --> L[Abre la nueva Directiva de Contraseña de Administradores de Dominio]
+L --> M[En la sección de Aplicación directa, en la casilla de texto, escribe Domain Admins si tu versión de Windows server está en inglés y Admins. del dominio si está en español]
+M --> N[Comprobar nombres]
+N --> O[Acepta todo]
+```
+
+## Activar la papelera de reciclaje de Active Directory
+
+```mermaid
+flowchart TD
+A[Entra en el Administardor del Sistema] --> B[En la ventana Herramientas entra en el Centro de Administración de Active Directory]
+B --> C[Clica tailwindtraders paréntesis,local,paréntesis]
+C --> D[En la parte de la derecha Activar Papelera de reciclaje]
+D --> E[Acepta las dos advertencias]
+```
+## Restinción de la Autenticación NTLM
+
+```mermaid
+flowchart TD
+A[Entra en el Administardor del Sistema] --> B[En la ventana Herramientas entra en el Administrador de Directivas de Grupo]
+B --> C[Expande el Bosque tailwindtraders.internal]
+C --> D[Expande la carpeta Dominios]
+D --> E[Expande el Dominio tailwindtraders.internal]
+E --> F[Clic derecho en las Directivas de Dominio por Defecto]
+F --> G[Editar]
+G --> H[Expande Equipo/Computer]
+H --> I[Expande Configuración]
+I --> J[Expande Directivas]
+J --> K[Expande Configuración de Windows]
+K --> L[Expande Configuración de Seguridad]
+L --> M[Expande Directivas Locales]
+M --> N[Expande Opciones de Seguridad]
+N --> O[Selecciona y haz doble clic Seguridad de la Red]
+O --> P[Restringir NTLM]
+P --> Q[Autenticación de NTLM en este dominio]
+Q --> R[Pulsa la casilla Define esta configuración de Directiva]
+R --> S[Selecciona Denegar todo]
+S --> T[Acepta y di que Sí en la casilla de confirmación]
+```
+
+## Gestión de cuentas de Usuario en Sydney
+
+```mermaid
+flowchart TD
+A[Entra en el Administardor del Servidor] --> B[En la ventana Herramientas entra en Administrador de directivas de grupo]
+B --> C[Expande tailwindtradders.internal]
+C --> D[Clic derecho en Sydney]
+D --> E[Crear un GPO en este dominio o vincularlo aquí]
+E --> F[Ponle de nombre al nuevo GPO SydneyOUPolicy]
+F --> G[Aceptar]
+G --> H[Clic derecho en SydneyOUPolicy]
+H --> I[Editar]
+I --> J[Pulsa Configuración de Equipo]
+J --> K[Expande Políticas]
+K --> L[Expande Configuración de Windows]
+L --> M[Expande Configuración de Seguridad]
+M --> N[Expande Configuración de Directiva de auditoría avanzada]
+N --> O[Expande Directivas de auditoría]
+O --> P[Pulsa Administración de cuentas]
+P --> Q[Haz doble clic en Auditoría de gestión de cuentas de usuario]
+Q --> R[Haz clic en la casilla de verificación Gestión de Cuentas de Usuario]
+R --> S[Clic en la casilla Configurar los siguientes eventos de auditoría]
+S --> T[Selecciona  los valores de Éxito y Fracaso]
+T --> U[Aceptar]
+```
+
+## Denegación del inicio de sesión como servicio
+
+```mermaid
+flowchart TD
+A[Entra en el Administardor del Servidor] --> B[En la ventana Herramientas entra en Administrador de directivas de grupo]
+B --> C[Expande tailwindtraders.internal]
+C --> D[Pulsa en Sydney]
+D --> E[Clic derecho en SydneyOUPolicy]
+E --> F[Editar]
 F --> G[G]
-G --> H[H]
-H --> I[I]
-I --> J[J]
-J --> K[K]
-K --> L[L]
-L --> M[M]
-M --> N[N]
-N --> O[O]
-O --> P[P]
-P --> Q[Q]
-Q --> R[R]
-R --> S[S]
-S --> T[T]
-T --> U[U]
-U --> V[V]
-V --> W[W]
-W --> X[X]
-X --> Y[Y]
-Y --> Z[Z]
+G --> H[Expande Configuración de Equipo]
+H --> I[Directivas]
+I --> J[Configuración de Windows]
+J --> K[Configuración de Seguridad]
+K --> L[Directivas Locales]
+L --> M[Asignaciónd de derechos de usuario]
+M --> N[Haz doble clic en Denegar inicio de sesión como servicio]
+N --> O[Selecciona la configuración Definir esta política]
+O --> P[Agregar Usuario o grupo]
+P --> Q[Explorar]
+Q --> R[Avanzado]
+R --> S[Buscar ahora]
+S --> T[En el grupo selecciona Adminstradores de Sydney]
+T --> U[Aceptar todo]
 ```
