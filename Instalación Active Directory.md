@@ -363,12 +363,10 @@ J --> K[Expande Configuración de Windows]
 K --> L[Expande Configuración de Seguridad]
 L --> M[Expande Directivas Locales]
 M --> N[Expande Opciones de Seguridad]
-N --> O[Selecciona y haz doble clic Seguridad de la Red]
-O --> P[Restringir NTLM]
-P --> Q[Autenticación de NTLM en este dominio]
-Q --> R[Pulsa la casilla Define esta configuración de Directiva]
-R --> S[Selecciona Denegar todo]
-S --> T[Acepta y di que Sí en la casilla de confirmación]
+N --> O[Selecciona y haz doble clic Seguridad de la Red: restringir NTLM: autentiación NTLM en este dominio]
+O --> PPulsa la casilla Define esta configuración de Directiva]
+P --> Q[[Selecciona Denegar todo]
+Q --> R[Acepta y di que Sí en la casilla de confirmación]
 ```
 
 ## Gestión de cuentas de Usuario en Sydney
