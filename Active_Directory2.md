@@ -1,4 +1,5 @@
 # Creación de Cuentas Operativas
+
 ```mermaid
 flowchart TD
 A[Entra en tu servidor con una cuenta de administrador]-->B[Abre el Administrador de servidor]
@@ -131,3 +132,11 @@ G-->H[Si no te dejase quitar a los usuarios antes de darle a editar dale a opcio
 <img width="1364" height="766" alt="imagen" src="https://github.com/user-attachments/assets/84662a2b-e222-4576-8c78-522703789fdc" />
 
 <img width="1361" height="767" alt="imagen" src="https://github.com/user-attachments/assets/141fed6b-e403-4a7c-8f8f-a6c65aa3a2ea" />
+
+# Aplicación de Herramientas de Administradores
+
+### Durante esta actividad se han usado las siguientes herramientas
+
+- ### Virtualizaciones en Hyper-V
+- ### Excel para las tablas
+- ### Herramientas de edición de Active Directory
