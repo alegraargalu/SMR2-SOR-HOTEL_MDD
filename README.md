@@ -2,7 +2,9 @@
 
 ## Ahora la recta final!!!
 
-## Trabajo hecho pero puede mejorar, ánimo ahora toca el reto final!!!
+## Trabajo hecho pero puede mejorar
+
+__Recordar la planificación es muy importante ahora que sois dos__
 
 [Reto 0x: Gestionar los recursos compartidos SAMBA](https://aules.edu.gva.es/fp/mod/assign/view.php?id=9934089)
 
