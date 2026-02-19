@@ -4,7 +4,7 @@
 
 ## Trabajo hecho pero puede mejorar
 
-__Recordar la planificación es muy importante ahora que sois dos__
+__Recordar la planificación es muy importante ahora que sois dos__ **AÑADE A NATALIA AL REPOSITORIO**
 
 [Reto 0x: Gestionar los recursos compartidos SAMBA](https://aules.edu.gva.es/fp/mod/assign/view.php?id=9934089)
 
